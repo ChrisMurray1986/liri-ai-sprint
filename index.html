@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liri's 14-Day AI Sprint</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; }
+    pre { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState } = React;
+
+    // Inline SVG icon components (replacing lucide-react)
+    const ChevronDown = ({ size = 24, className = "" }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="6 9 12 15 18 9"/></svg>
+    );
+    const ChevronRight = ({ size = 24, className = "" }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="9 18 15 12 9 6"/></svg>
+    );
+    const Copy = ({ size = 24, className = "" }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+    );
+    const Check = ({ size = 24, className = "" }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="20 6 9 17 4 12"/></svg>
+    );
+    const ExternalLink = ({ size = 24, className = "" }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    );
+    const Zap = ({ size = 24, className = "" }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    );
+    const BookOpen = ({ size = 24, className = "" }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+    );
+    const Target = ({ size = 24, className = "" }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+    );
+    const Award = ({ size = 24, className = "" }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+    );
+    const Clock = ({ size = 24, className = "" }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    );
+
+    const sprintDays = [
+      {
+        day: 1, title: "Your First AI Conversation", tool: "ChatGPT",
+        toolLink: "https://chat.openai.com", icon: "\u{1F4AC}", time: "45 min",
+        objective: "Get comfortable having a back-and-forth conversation with AI. Learn that it's like briefing a smart intern \u2014 you guide it, review its work, and refine.",
+        exercise: {
+          title: "Draft an Executive Briefing",
+          scenario: "Imagine your CEO has a meeting tomorrow with a potential partner company. You need to prepare a 1-page briefing document.",
+          steps: [
+            "Sign up for ChatGPT (free tier works) at chat.openai.com",
+            "Copy and paste the prompt below",
+            "Review the output \u2014 what's good? What needs fixing?",
+            "Ask ChatGPT to revise: \"Make the tone more formal\" or \"Add a section on risks\"",
+            "Notice how you're directing the AI, not just accepting its first answer"
+          ]
+        },
+        prompt: "I'm an Executive Operations Partner preparing a briefing for my CEO. They have a meeting tomorrow with the VP of Partnerships at [Company Name], a luxury fashion brand expanding into the US market.\n\nPlease create a 1-page executive briefing that includes:\n1. Company overview (2-3 sentences)\n2. Key leadership team members the CEO should know\n3. Recent news or announcements (last 6 months)\n4. Potential partnership opportunities\n5. 3 smart questions the CEO could ask\n\nTone: Professional, concise, CEO-ready. No fluff.",
+        resumeBullet: "AI-assisted executive briefing preparation and stakeholder research",
+        tip: "Think of AI like a first draft machine. Your job is judgment \u2014 knowing what's good, what's wrong, and how to improve it. That's the skill that matters."
+      },
+      {
+        day: 2, title: "Document Synthesis", tool: "ChatGPT or Claude",
+        toolLink: "https://claude.ai", icon: "\u{1F4C4}", time: "45 min",
+        objective: "Learn to use AI to distill long, complex documents into executive-ready summaries. This is one of the highest-value daily use cases for executive operations.",
+        exercise: {
+          title: "Summarize a Complex Document",
+          scenario: "You've received a 15-page quarterly business review and need to create a 1-page summary for the CEO who has 5 minutes before a board call.",
+          steps: [
+            "Find any long article or document (a news article, report, or even a Wikipedia page)",
+            "Paste it into ChatGPT or Claude with the prompt below",
+            "Compare the summary to the original \u2014 did it capture the right priorities?",
+            "Try: \"Rewrite this for a CEO who cares most about financial impact\"",
+            "Try again: \"Now write it as 5 bullet points, each under 20 words\""
+          ]
+        },
+        prompt: "I'm preparing an executive summary for my CEO who has 5 minutes before a board call. Please synthesize the following document into:\n\n1. A 3-sentence executive summary (the \"so what\")\n2. Top 3 key findings or decisions needed\n3. Any risks or red flags to flag\n4. Recommended next steps\n\nFormat it so it can be scanned in under 2 minutes. Use bold for the most critical points.\n\n[PASTE YOUR DOCUMENT HERE]",
+        resumeBullet: "Executive document synthesis and decision-ready communication using AI",
+        tip: "Claude (claude.ai) is especially good at long documents \u2014 it can handle much more text than ChatGPT's free tier. Try both and see which you prefer."
+      },
+      {
+        day: 3, title: "Meeting Preparation", tool: "ChatGPT",
+        toolLink: "https://chat.openai.com", icon: "\u{1F4CB}", time: "45 min",
+        objective: "Build an AI-powered meeting prep workflow \u2014 agenda, pre-read, talking points, and follow-up template \u2014 in a fraction of the time.",
+        exercise: {
+          title: "Create a Complete Meeting Package",
+          scenario: "The CEO has a quarterly leadership offsite next week. You need to prepare the full meeting package.",
+          steps: [
+            "Use the prompt below to generate a meeting agenda",
+            "Ask AI to create a pre-read document for attendees",
+            "Generate talking points for each agenda item",
+            "Create a follow-up email template with action item tracking",
+            "Review everything \u2014 adjust tone, add context only you would know"
+          ]
+        },
+        prompt: "I'm preparing a quarterly leadership offsite for a CEO and their 6 direct reports (VP Marketing, VP Sales, CFO, VP Product, VP People, General Counsel). The meeting is 4 hours.\n\nPlease create:\n1. A timed agenda with clear objectives for each section\n2. A 1-page pre-read memo summarizing the key topics to be discussed\n3. 2-3 discussion questions per agenda item to drive productive conversation\n4. A post-meeting follow-up email template with an action item tracker (owner, deadline, status)\n\nContext: This is a growth-stage company in the fashion/luxury space. Q1 results were mixed \u2014 revenue up but margins compressed.",
+        resumeBullet: "AI-powered meeting preparation, agenda design, and action-item tracking systems",
+        tip: "This is the kind of work that used to take 2-3 hours. With AI, the first draft takes 10 minutes. Your value is in the refinement \u2014 adding context, reading the room, knowing what the CEO actually cares about."
+      },
+      {
+        day: 4, title: "Stakeholder Communications", tool: "ChatGPT or Claude",
+        toolLink: "https://chat.openai.com", icon: "\u2709\uFE0F", time: "45 min",
+        objective: "Master AI-assisted email drafting for different stakeholders and tones \u2014 from board members to vendors to internal teams.",
+        exercise: {
+          title: "Draft Emails in Multiple Tones",
+          scenario: "The CEO needs three emails sent today: one to a board member, one declining a vendor meeting politely, and one rallying the team after a tough quarter.",
+          steps: [
+            "Use the prompt below to generate all three emails",
+            "Notice how AI adapts tone for different audiences",
+            "Refine each one \u2014 add personal touches only you would know",
+            "Try: \"Make the board email shorter\" or \"Make the team email more inspiring\"",
+            "Save your favorite prompts \u2014 you'll reuse these constantly"
+          ]
+        },
+        prompt: "I need to draft three emails on behalf of my CEO. Please write each with the appropriate tone:\n\n1. TO: Board Member (formal, concise, respectful)\nSubject: Q1 Results Preview\nContext: Results were mixed \u2014 revenue up 12%, but margins compressed due to expansion costs. Meeting next week to discuss.\n\n2. TO: Vendor requesting a meeting (warm but firm decline)\nContext: We're not interested in their CRM platform right now. Leave the door open for future.\n\n3. TO: All-hands company team (motivational, authentic, not corporate-speak)\nContext: Tough quarter, but the team worked hard. New product launches coming in Q2. CEO wants to acknowledge the effort and build momentum.\n\nFor each: keep under 150 words. Sound human, not robotic.",
+        resumeBullet: "AI-assisted executive communications across board, vendor, and internal stakeholders",
+        tip: "The best CoS professionals don't just draft emails \u2014 they match the CEO's voice. After a few rounds, try telling the AI: \"Write this in a tone that's warm but direct, like someone who respects people's time.\""
+      },
+      {
+        day: 5, title: "Research & Intelligence", tool: "Perplexity AI",
+        toolLink: "https://www.perplexity.ai", icon: "\u{1F50D}", time: "60 min",
+        objective: "Use AI-powered research to build executive intelligence briefs \u2014 the kind of prep that makes a CEO walk into any meeting feeling prepared.",
+        exercise: {
+          title: "Build a Company Intelligence Brief",
+          scenario: "Research one of your target companies (try Herm\u00e8s, Asia Society, or any company you're interested in) and create a briefing.",
+          steps: [
+            "Sign up for Perplexity AI (free) at perplexity.ai \u2014 it searches the web in real time",
+            "Use the prompt below to research a target company",
+            "Ask follow-up questions: \"Who is their CEO?\" \"Any recent leadership changes?\"",
+            "Compile findings into a 1-page brief using ChatGPT",
+            "This is exactly the kind of deliverable you'd produce as a CoS"
+          ]
+        },
+        prompt: "Research [COMPANY NAME] and provide:\n\n1. Company overview: what they do, headquarters, approximate size\n2. CEO and key leadership team (names + titles)\n3. Recent news from the last 6 months (product launches, earnings, leadership changes, strategic moves)\n4. Company culture signals (from Glassdoor, press, or social media)\n5. Challenges or opportunities they're likely facing right now\n6. 3 intelligent questions someone could ask their CEO that show deep understanding\n\nFocus on information that would be useful for someone interviewing or partnering with this company.",
+        resumeBullet: "AI-powered competitive intelligence and executive research using Perplexity AI",
+        tip: "Perplexity is different from ChatGPT \u2014 it searches the live web and cites its sources. Use it for current information. Use ChatGPT/Claude for drafting and synthesis."
+      },
+      {
+        day: "6-7", title: "Weekend Review & Practice", tool: "All tools so far",
+        toolLink: null, icon: "\u2615", time: "At your own pace",
+        objective: "Revisit your favorite exercises. Try them with real scenarios from your own experience. The goal is comfort, not perfection.",
+        exercise: {
+          title: "Real-World Practice",
+          scenario: "Take what you've learned and apply it to something real.",
+          steps: [
+            "Pick a real company you're interested in and build a full intelligence brief",
+            "Draft a real cover letter for an open role using AI",
+            "Summarize an article you've been meaning to read",
+            "Draft a networking email to someone in your industry",
+            "Reflect: which tool felt most natural? Which exercise was most valuable?"
+          ]
+        },
+        prompt: null, resumeBullet: null,
+        tip: "Don't worry about being perfect. The goal is to build a habit: \"Before I start writing anything from scratch, let me see if AI can give me a first draft.\""
+      },
+      {
+        day: 8, title: "Microsoft Copilot", tool: "Microsoft 365 Copilot",
+        toolLink: "https://copilot.microsoft.com", icon: "\u{1F5A5}\uFE0F", time: "60 min",
+        objective: "Learn to use AI inside the tools executive teams already use \u2014 Outlook, Word, PowerPoint, and Excel.",
+        exercise: {
+          title: "AI Inside Your Workflow",
+          scenario: "Instead of switching to a separate AI tool, use Copilot directly inside Microsoft apps.",
+          steps: [
+            "If you have Microsoft 365, explore Copilot in Outlook (email summarization, drafting)",
+            "In Word: ask Copilot to generate a document from a prompt",
+            "In PowerPoint: create a presentation from a brief",
+            "If you don't have M365 Copilot, use copilot.microsoft.com (free) for similar tasks",
+            "Note: Many target companies (Herm\u00e8s, Asia Society) use Microsoft 365"
+          ]
+        },
+        prompt: "Try these inside Microsoft Copilot:\n\nOUTLOOK: \"Summarize this email thread and list the action items for me\"\nWORD: \"Create a project status update template for a weekly leadership meeting\"\nPOWERPOINT: \"Create a 5-slide presentation on Q1 operational highlights\"\nEXCEL: \"Analyze this data and create a summary chart\"\n\nOr use copilot.microsoft.com:\n\"Draft a professional email declining a meeting request while keeping the relationship warm\"",
+        resumeBullet: "Microsoft 365 Copilot for executive productivity (Outlook, Word, PowerPoint, Excel)",
+        tip: "Copilot is the AI tool most likely to be used in your target companies. Being comfortable with it is a real differentiator."
+      },
+      {
+        day: 9, title: "Meeting Transcription & Action Items", tool: "Otter.ai",
+        toolLink: "https://otter.ai", icon: "\u{1F399}\uFE0F", time: "45 min",
+        objective: "Set up AI-powered meeting transcription that automatically captures notes and action items \u2014 a game-changer for executive operations.",
+        exercise: {
+          title: "Transcribe and Extract Action Items",
+          scenario: "Record yourself describing a hypothetical meeting outcome (or use any podcast/video), then let AI extract the structure.",
+          steps: [
+            "Sign up for Otter.ai (free tier) at otter.ai",
+            "Record a 5-minute voice memo describing a meeting: who attended, what was discussed, what was decided",
+            "Let Otter.ai transcribe it automatically",
+            "Review the AI-generated summary and action items",
+            "Then paste the transcript into ChatGPT with: \"Extract all action items, assign owners, and suggest deadlines\""
+          ]
+        },
+        prompt: "Here is a meeting transcript. Please extract:\n\n1. Key decisions made\n2. Action items (formatted as: [Owner] \u2014 [Action] \u2014 [Deadline])\n3. Open questions that need follow-up\n4. A 3-sentence summary I can send to attendees who missed the meeting\n\nTranscript:\n[PASTE OTTER.AI TRANSCRIPT HERE]",
+        resumeBullet: "AI-powered meeting synthesis and action tracking using Otter.ai",
+        tip: "Imagine telling a hiring manager: \"I use AI to ensure every meeting results in tracked action items with owners and deadlines \u2014 nothing falls through the cracks.\" That's Chief of Staff energy."
+      },
+      {
+        day: 10, title: "Workflow Automation", tool: "Zapier",
+        toolLink: "https://zapier.com", icon: "\u26A1", time: "60 min",
+        objective: "Create your first automated workflow \u2014 turning repetitive tasks into systems that run themselves.",
+        exercise: {
+          title: "Build One Automation",
+          scenario: "Create a simple automation that saves you time on a recurring task.",
+          steps: [
+            "Sign up for Zapier (free tier \u2014 5 automations) at zapier.com",
+            "Create your first \"Zap\": When I receive an email with a specific subject \u2192 Create a task in my to-do app",
+            "Or try: When a Google Calendar event starts \u2192 Send me a Slack/email reminder with prep notes",
+            "Or: When I star an email \u2192 Add it to a Google Sheet tracker",
+            "The point isn't the specific automation \u2014 it's understanding that you CAN automate"
+          ]
+        },
+        prompt: null,
+        resumeBullet: "Process automation using Zapier for executive office workflows",
+        tip: "You don't need to build complex automations. Even one simple Zap shows employers you think in systems, not just tasks."
+      },
+      {
+        day: 11, title: "Deep Research Sprint", tool: "Perplexity + ChatGPT",
+        toolLink: "https://www.perplexity.ai", icon: "\u{1F9E0}", time: "60 min",
+        objective: "Combine multiple AI tools to produce a professional-grade deliverable \u2014 the kind of work product that demonstrates AI-augmented executive operations.",
+        exercise: {
+          title: "Full Company Intelligence Brief",
+          scenario: "Pick a company from your target list and produce a complete intelligence package \u2014 as if your CEO asked you to prepare for a partnership meeting.",
+          steps: [
+            "Use Perplexity to gather current information (news, leadership, strategy)",
+            "Use ChatGPT to synthesize findings into a structured briefing document",
+            "Add talking points and recommended questions",
+            "Format it professionally \u2014 this is a portfolio piece",
+            "Save it \u2014 you can show this in interviews as an example of your AI-augmented work"
+          ]
+        },
+        prompt: "Using the research I've gathered below, please create a professional Executive Intelligence Brief formatted as:\n\nCOMPANY: [Name]\nPREPARED FOR: CEO \u2014 [Meeting/Purpose]\nDATE: [Today]\n\n1. COMPANY SNAPSHOT (3 sentences)\n2. LEADERSHIP TEAM (key names, titles, relevant background)\n3. RECENT DEVELOPMENTS (last 6 months, bulleted)\n4. STRATEGIC PRIORITIES (what they're focused on)\n5. RISKS & CHALLENGES\n6. OPPORTUNITIES FOR PARTNERSHIP/ENGAGEMENT\n7. RECOMMENDED TALKING POINTS (3-5 points)\n8. SMART QUESTIONS TO ASK (3-5 questions that show deep understanding)\n\nTone: Professional, concise, board-ready.\n\nRESEARCH:\n[PASTE YOUR PERPLEXITY FINDINGS HERE]",
+        resumeBullet: "Multi-tool AI research workflows for executive intelligence and decision support",
+        tip: "This deliverable is your proof. When an interviewer asks \"How do you use AI?\" you can show them this and say: \"I built this in 30 minutes using Perplexity for research and ChatGPT for synthesis.\""
+      },
+      {
+        day: 12, title: "Build Your Portfolio Artifact", tool: "All tools",
+        toolLink: null, icon: "\u{1F3D7}\uFE0F", time: "90 min",
+        objective: "Create the \"Executive Meeting-to-Action System\" \u2014 a complete workflow document that demonstrates your AI-augmented executive operations capability.",
+        exercise: {
+          title: "Meeting-to-Action System",
+          scenario: "Build a template/workflow that shows how you'd run the executive meeting process from prep to follow-through, using AI at every step.",
+          steps: [
+            "Use ChatGPT to draft the system overview (see prompt below)",
+            "Create a meeting prep template (Day 3 skills)",
+            "Create an action item tracker format (Day 9 skills)",
+            "Add the automation layer (Day 10 \u2014 how Zapier connects the pieces)",
+            "Package it as a clean document \u2014 this goes in your portfolio"
+          ]
+        },
+        prompt: "Help me create an \"Executive Meeting-to-Action System\" \u2014 a professional workflow document I can show to prospective employers. It should demonstrate how I use AI tools to run executive meeting operations.\n\nStructure:\n1. SYSTEM OVERVIEW: What this system does and why it matters (2-3 sentences)\n2. PRE-MEETING (AI-assisted): How I use AI to prepare agendas, pre-reads, and briefings\n3. DURING MEETING: How I use Otter.ai for transcription and real-time capture\n4. POST-MEETING (AI-assisted): How I use AI to extract action items, draft follow-up emails, and create accountability tracking\n5. AUTOMATION LAYER: How Zapier connects the pieces (calendar triggers, task creation, reminder sequences)\n6. TOOLS USED: ChatGPT/Claude, Otter.ai, Zapier, Microsoft 365\n7. RESULTS: What this system achieves (faster follow-through, nothing falls through cracks, CEO always prepared)\n\nMake it look like a professional operations document, not a school assignment. This is executive-level work.",
+        resumeBullet: "Designed and implemented AI-augmented executive meeting-to-action operating system",
+        tip: "This is the capstone. If you can show this to a hiring manager and walk them through it, you've just demonstrated exactly the kind of systems thinking they want in a Chief of Staff."
+      },
+      {
+        day: 13, title: "Resume Upgrade", tool: "ChatGPT",
+        toolLink: "https://chat.openai.com", icon: "\u{1F4DD}", time: "45 min",
+        objective: "Update your resume with the specific AI tools and skills you've now actually used. No more \"foundational concepts\" \u2014 you have real experience.",
+        exercise: {
+          title: "Rewrite Your AI Section",
+          scenario: "Transform your resume's AI section from aspirational to demonstrable.",
+          steps: [
+            "Review the resume bullets you've earned throughout this sprint (listed below)",
+            "Use ChatGPT to help wordsmith them for your specific resume format",
+            "Replace the current \"Professional Development\" section with concrete tools and skills",
+            "Add AI references to your experience bullets where relevant",
+            "Review the before/after comparison at the bottom of this page"
+          ]
+        },
+        prompt: "I need to update the AI section of my resume. I'm an Executive Operations professional targeting Chief of Staff roles.\n\nReplace this current section:\n\"AI AND AUTOMATION (PROFESSIONAL DEVELOPMENT)\n- Generative AI for executive productivity with verification and confidentiality practices\n- Workflow mapping and SOP documentation; identifying automation opportunities\n- Foundational AI adoption concepts: use-case intake, change management, and governance guardrails\"\n\nWith a stronger section that reflects tools I've actually used:\n- ChatGPT and Claude for executive briefings, document synthesis, and stakeholder communications\n- Microsoft 365 Copilot for email, documents, and presentations\n- Otter.ai for meeting transcription and action-item extraction\n- Zapier for workflow automation in executive office processes\n- Perplexity AI for competitive intelligence and executive research\n\nMake it concise (3-4 bullet points max) and format it for a 1-page executive resume. The tone should convey \"I use these daily\" not \"I'm learning about these.\"",
+        resumeBullet: null,
+        tip: "The 56% salary premium goes to people who list specific tools, not vague concepts. \"ChatGPT for executive briefings\" beats \"Generative AI knowledge\" every time."
+      },
+      {
+        day: 14, title: "Celebration & Next Steps", tool: "You!",
+        toolLink: null, icon: "\u{1F389}", time: "30 min",
+        objective: "Review everything you've accomplished. You've gone from AI-curious to AI-capable in two weeks.",
+        exercise: {
+          title: "Reflect and Plan Forward",
+          scenario: "Take stock of your new capabilities and plan how to keep building.",
+          steps: [
+            "Review your updated resume \u2014 feel the difference?",
+            "Look at your portfolio artifact (Meeting-to-Action System) \u2014 this is real proof",
+            "Update your LinkedIn headline to include AI-related positioning",
+            "Commit to using AI for one task every day going forward",
+            "Celebrate \u2014 you just did something most professionals haven't done yet"
+          ]
+        },
+        prompt: null, resumeBullet: null,
+        tip: "You didn't just learn tools \u2014 you developed a new way of working. Every task now starts with: \"Can AI give me a first draft?\" That's the mindset shift that matters."
+      }
+    ];
+
+    const promptLibrary = [
+      { category: "Executive Briefings", prompt: "I'm preparing a briefing for my CEO who is meeting with [Person/Company]. Create a 1-page document covering: company overview, key people to know, recent news, talking points, and 3 smart questions to ask. Tone: concise, CEO-ready.", icon: "\u{1F4CB}" },
+      { category: "Email Drafting", prompt: "Draft a professional email from [CEO name] to [recipient + context]. The tone should be [formal/warm/direct]. Keep it under [X] words. The key message is: [main point].", icon: "\u2709\uFE0F" },
+      { category: "Meeting Agendas", prompt: "Create a timed agenda for a [duration] meeting with [attendees]. The goals are: [list goals]. Include discussion questions for each section and a format for capturing decisions and action items.", icon: "\u{1F4C5}" },
+      { category: "Document Summary", prompt: "Summarize the following document for a busy executive. Provide: a 3-sentence executive summary, top 3 takeaways, any risks to flag, and recommended next steps. Format for a 2-minute scan. [PASTE DOCUMENT]", icon: "\u{1F4C4}" },
+      { category: "Company Research", prompt: "Research [Company Name] and provide: overview, CEO and leadership team, recent news (last 6 months), culture signals, strategic challenges, and 3 questions that show deep understanding of their business.", icon: "\u{1F50D}" },
+      { category: "Action Item Extraction", prompt: "Extract all action items from this meeting transcript. Format as: [Owner] \u2014 [Action] \u2014 [Suggested Deadline]. Also list key decisions made and open questions needing follow-up. [PASTE TRANSCRIPT]", icon: "\u2705" },
+      { category: "Cover Letter", prompt: "Write a cover letter for [Role] at [Company]. My background: [2-3 key experiences]. What excites me about this role: [specific reason]. Tone: professional, warm, confident. Keep it to 3 paragraphs.", icon: "\u{1F4DD}" },
+      { category: "Interview Prep", prompt: "I'm interviewing for [Role] at [Company]. Generate 10 likely behavioral questions, then help me structure STAR stories for each using these experiences: [list 3-4 situations from your career].", icon: "\u{1F3A4}" },
+      { category: "Status Update", prompt: "Help me write a weekly status update for my CEO. Format: Top 3 wins this week, Key decisions needed, Risks/blockers, Next week priorities. Context: [describe what happened this week].", icon: "\u{1F4CA}" },
+      { category: "Tone Adjustment", prompt: "Rewrite the following text in a [more formal / more casual / more empathetic / more concise] tone while keeping the core message intact: [PASTE TEXT]", icon: "\u{1F3AD}" }
+    ];
+
+    function CopyButton({ text }) {
+      const [copied, setCopied] = useState(false);
+      const handleCopy = () => {
+        navigator.clipboard.writeText(text);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      };
+      return (
+        <button onClick={handleCopy} className="flex items-center gap-1 px-3 py-1.5 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+          {copied ? <><Check size={14} className="text-green-600" /> <span className="text-green-600">Copied!</span></> : <><Copy size={14} /> <span>Copy Prompt</span></>}
+        </button>
+      );
+    }
+
+    function DayCard({ data }) {
+      const [open, setOpen] = useState(false);
+      return (
+        <div className="border border-gray-200 rounded-xl overflow-hidden mb-3 bg-white shadow-sm hover:shadow-md transition-shadow">
+          <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">{data.icon}</span>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-semibold text-indigo-900 bg-indigo-50 px-2 py-0.5 rounded">Day {data.day}</span>
+                  <span className="font-semibold text-gray-900">{data.title}</span>
+                </div>
+                <div className="flex items-center gap-3 mt-1 text-sm text-gray-500">
+                  <span className="flex items-center gap-1"><Zap size={12} /> {data.tool}</span>
+                  <span className="flex items-center gap-1"><Clock size={12} /> {data.time}</span>
+                </div>
+              </div>
+            </div>
+            {open ? <ChevronDown size={20} className="text-gray-400" /> : <ChevronRight size={20} className="text-gray-400" />}
+          </button>
+          {open && (
+            <div className="px-4 pb-4 border-t border-gray-100">
+              <div className="mt-4 p-3 bg-indigo-50 rounded-lg">
+                <p className="text-sm text-indigo-900 font-medium">Objective</p>
+                <p className="text-sm text-indigo-800 mt-1">{data.objective}</p>
+              </div>
+              <div className="mt-4">
+                <h4 className="font-semibold text-gray-900 flex items-center gap-2"><Target size={16} /> {data.exercise.title}</h4>
+                <p className="text-sm text-gray-600 mt-1 italic">{data.exercise.scenario}</p>
+                <ol className="mt-3 space-y-2">
+                  {data.exercise.steps.map((step, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                      <span className="bg-indigo-100 text-indigo-800 rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">{i + 1}</span>
+                      {step}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+              {data.prompt && (
+                <div className="mt-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-semibold text-gray-900 flex items-center gap-2"><BookOpen size={16} /> Prompt Template</h4>
+                    <CopyButton text={data.prompt} />
+                  </div>
+                  <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed">{data.prompt}</pre>
+                </div>
+              )}
+              {data.toolLink && (
+                <a href={data.toolLink} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors">
+                  Open {data.tool} <ExternalLink size={14} />
+                </a>
+              )}
+              {data.resumeBullet && (
+                <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                  <p className="text-sm text-green-800 font-medium flex items-center gap-2"><Award size={14} /> Resume Bullet Earned</p>
+                  <p className="text-sm text-green-700 mt-1">"{data.resumeBullet}"</p>
+                </div>
+              )}
+              {data.tip && (
+                <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                  <p className="text-sm text-amber-900"><span className="font-semibold">Pro Tip:</span> {data.tip}</p>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    function App() {
+      const [activeTab, setActiveTab] = useState("sprint");
+
+      return (
+        <div className="min-h-screen bg-gradient-to-b from-indigo-50 via-white to-white">
+          {/* Hero */}
+          <div className="bg-gradient-to-r from-indigo-900 via-indigo-800 to-indigo-900 text-white">
+            <div className="max-w-3xl mx-auto px-4 py-12 text-center">
+              <p className="text-indigo-300 text-sm font-medium tracking-widest uppercase mb-2">AI Skills Sprint</p>
+              <h1 className="text-4xl font-bold mb-3">Liri's 14-Day AI Sprint</h1>
+              <p className="text-indigo-200 text-lg mb-6">From AI-curious to AI-capable. 45 minutes a day.</p>
+              <div className="inline-block bg-indigo-700/50 border border-indigo-500 rounded-xl px-6 py-4 text-left">
+                <p className="text-indigo-100 text-sm">
+                  <span className="text-white font-bold text-2xl">56%</span> salary premium for AI skills on your resume &mdash; same job, same title, same seniority.
+                </p>
+                <p className="text-indigo-300 text-xs mt-1">Source: The Algorithmic Bridge, 2026</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation Tabs */}
+          <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
+            <div className="max-w-3xl mx-auto px-4 flex gap-1">
+              {[
+                { id: "sprint", label: "Daily Sprint", IconComp: Zap },
+                { id: "prompts", label: "Prompt Library", IconComp: BookOpen },
+                { id: "resume", label: "Resume Builder", IconComp: Award }
+              ].map(tab => (
+                <button key={tab.id} onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${activeTab === tab.id ? "border-indigo-600 text-indigo-600" : "border-transparent text-gray-500 hover:text-gray-700"}`}>
+                  <tab.IconComp size={16} /> {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="max-w-3xl mx-auto px-4 py-8">
+            {/* Sprint Tab */}
+            {activeTab === "sprint" && (
+              <div>
+                <div className="mb-6">
+                  <h2 className="text-xl font-bold text-gray-900 mb-2">Your 14-Day Sprint</h2>
+                  <p className="text-gray-600">Each day builds on the last. Open a card, follow the steps, copy the prompts, and practice. By Day 14, you'll have real AI skills and a portfolio to prove it.</p>
+                </div>
+                <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                  <p className="text-sm text-blue-800"><span className="font-semibold">Week 1</span> &mdash; Core AI Fluency: ChatGPT, Claude, Perplexity</p>
+                </div>
+                {sprintDays.slice(0, 6).map((day, i) => <DayCard key={i} data={day} />)}
+                <div className="mb-4 mt-6 p-3 bg-purple-50 border border-purple-200 rounded-lg">
+                  <p className="text-sm text-purple-800"><span className="font-semibold">Week 2</span> &mdash; Advanced Tools & Portfolio Building</p>
+                </div>
+                {sprintDays.slice(6).map((day, i) => <DayCard key={i + 6} data={day} />)}
+              </div>
+            )}
+
+            {/* Prompt Library Tab */}
+            {activeTab === "prompts" && (
+              <div>
+                <h2 className="text-xl font-bold text-gray-900 mb-2">Prompt Library</h2>
+                <p className="text-gray-600 mb-6">Copy-paste prompts for common executive operations tasks. Customize the bracketed sections for your specific situation.</p>
+                <div className="space-y-3">
+                  {promptLibrary.map((item, i) => (
+                    <div key={i} className="border border-gray-200 rounded-xl p-4 bg-white shadow-sm">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="font-semibold text-gray-900 flex items-center gap-2">
+                          <span>{item.icon}</span> {item.category}
+                        </h3>
+                        <CopyButton text={item.prompt} />
+                      </div>
+                      <pre className="bg-gray-50 p-3 rounded-lg text-sm text-gray-700 whitespace-pre-wrap font-mono leading-relaxed">{item.prompt}</pre>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Resume Builder Tab */}
+            {activeTab === "resume" && (
+              <div>
+                <h2 className="text-xl font-bold text-gray-900 mb-2">Resume AI Section Builder</h2>
+                <p className="text-gray-600 mb-6">As you complete each day, you earn a resume bullet. Here's your before and after.</p>
+                <div className="grid gap-4 md:grid-cols-2 mb-8">
+                  <div className="border border-red-200 rounded-xl p-4 bg-red-50">
+                    <h3 className="font-semibold text-red-800 mb-3 flex items-center gap-2">&cross; Before (Current Resume)</h3>
+                    <div className="text-sm text-red-700 space-y-2">
+                      <p className="font-medium text-xs uppercase tracking-wider text-red-500">AI AND AUTOMATION (PROFESSIONAL DEVELOPMENT)</p>
+                      <p>&bull; Generative AI for executive productivity with verification and confidentiality practices</p>
+                      <p>&bull; Workflow mapping and SOP documentation; identifying automation opportunities</p>
+                      <p>&bull; Foundational AI adoption concepts: use-case intake, change management, governance guardrails</p>
+                    </div>
+                  </div>
+                  <div className="border border-green-200 rounded-xl p-4 bg-green-50">
+                    <h3 className="font-semibold text-green-800 mb-3 flex items-center gap-2">&check; After (Sprint Complete)</h3>
+                    <div className="text-sm text-green-700 space-y-2">
+                      <p className="font-medium text-xs uppercase tracking-wider text-green-500">AI & AUTOMATION TOOLS</p>
+                      <p>&bull; ChatGPT / Claude for executive briefings, document synthesis, and stakeholder communications</p>
+                      <p>&bull; Microsoft 365 Copilot for email, documents, presentations, and data analysis</p>
+                      <p>&bull; Otter.ai for AI-powered meeting transcription and action-item extraction</p>
+                      <p>&bull; Zapier for executive office workflow automation; Perplexity AI for competitive intelligence</p>
+                    </div>
+                  </div>
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-3">All Resume Bullets You'll Earn</h3>
+                <div className="space-y-2">
+                  {sprintDays.filter(d => d.resumeBullet).map((d, i) => (
+                    <div key={i} className="flex items-start gap-3 p-3 bg-white border border-gray-200 rounded-lg">
+                      <span className="bg-indigo-100 text-indigo-800 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0">D{d.day}</span>
+                      <p className="text-sm text-gray-700">{d.resumeBullet}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Footer */}
+          <div className="bg-gray-50 border-t border-gray-200 mt-12">
+            <div className="max-w-3xl mx-auto px-4 py-6 text-center">
+              <p className="text-sm text-gray-500">Built for Liri by Chris Murray</p>
+              <p className="text-xs text-gray-400 mt-1">Part of the Pathways Forward program</p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
