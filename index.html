@@ -72,37 +72,56 @@
         tip: "Think of AI like a first draft machine. Your job is judgment \u2014 knowing what's good, what's wrong, and how to improve it. That's the skill that matters."
       },
       {
-        day: 2, title: "Document Synthesis", tool: "ChatGPT or Claude",
-        toolLink: "https://claude.ai", icon: "\u{1F4C4}", time: "45 min",
-        objective: "Learn to use AI to distill long, complex documents into executive-ready summaries. This is one of the highest-value daily use cases for executive operations.",
+        day: 2, title: "The Anatomy of a Great Prompt", tool: "ChatGPT",
+        toolLink: "https://chat.openai.com", icon: "\u{1F9EC}", time: "45 min",
+        objective: "Learn the five elements that separate a vague request from a precise instruction. This is the skill behind every exercise in this sprint \u2014 and the difference between getting usable output and getting garbage.",
         exercise: {
-          title: "Summarize a Complex Document",
-          scenario: "You've received a 15-page quarterly business review and need to create a 1-page summary for the CEO who has 5 minutes before a board call.",
+          title: "Rebuild Yesterday's Prompt from Scratch",
+          scenario: "Yesterday you used a pre-written prompt for an executive briefing. Today, you'll learn WHY that prompt worked \u2014 and build one yourself using the RGCTE framework: Role, Goal, Context, Task, Evaluation.",
           steps: [
-            "Find any long article or document (a news article, report, or even a Wikipedia page)",
-            "Paste it into ChatGPT or Claude with the prompt below",
-            "Compare the summary to the original \u2014 did it capture the right priorities?",
-            "Try: \"Rewrite this for a CEO who cares most about financial impact\"",
-            "Try again: \"Now write it as 5 bullet points, each under 20 words\""
+            "Read the framework below \u2014 these five elements are the building blocks of every effective prompt",
+            "Open ChatGPT and type a bare-minimum version: \"Write me a briefing document.\" Notice how vague the output is",
+            "Now add each RGCTE element one at a time and re-run the prompt after each addition. Watch the output sharpen with every layer",
+            "Compare your final RGCTE prompt to yesterday's pre-written one \u2014 you'll see the same structure, but now you understand why each piece is there",
+            "Try the framework on something new: a meeting agenda, a status update, or a cover letter. Build the prompt yourself \u2014 no template"
           ]
         },
-        prompt: "I'm preparing an executive summary for my CEO who has 5 minutes before a board call. Please synthesize the following document into:\n\n1. A 3-sentence executive summary (the \"so what\")\n2. Top 3 key findings or decisions needed\n3. Any risks or red flags to flag\n4. Recommended next steps\n\nFormat it so it can be scanned in under 2 minutes. Use bold for the most critical points.\n\n[PASTE YOUR DOCUMENT HERE]",
-        resumeBullet: "Executive document synthesis and decision-ready communication using AI",
-        tip: "Claude (claude.ai) is especially good at long documents \u2014 it can handle much more text than ChatGPT's free tier. Try both and see which you prefer."
+        prompt: "THE RGCTE FRAMEWORK \u2014 Five elements of a great prompt:\n\n\u2460 ROLE: Tell the AI who it is.\n   \"You are a Chief of Staff at a luxury fashion company...\"\n   Why: Sets the expertise level, vocabulary, and perspective.\n\n\u2461 GOAL: Tell it what success looks like.\n   \"I need a document my CEO can scan in 2 minutes and walk into the meeting feeling prepared.\"\n   Why: Gives the AI a target to aim for, not just a task to complete.\n\n\u2462 CONTEXT: Give it the situation.\n   \"The CEO is meeting the VP of Partnerships at Kering. Kering just reported mixed Q1 earnings and is expanding their US direct-to-consumer strategy.\"\n   Why: The more specific context you provide, the less generic the output.\n\n\u2463 TASK: Tell it exactly what to produce.\n   \"Create a 1-page briefing with: company overview, key people, recent news, 3 smart questions to ask.\"\n   Why: Structure the output so you don't have to restructure it later.\n\n\u2464 EVALUATION: Tell it how you'll judge quality.\n   \"Tone: concise and CEO-ready. No jargon. Each section under 50 words.\"\n   Why: Sets the bar for quality and prevents the AI from over-explaining.\n\n\u2014\u2014\u2014\n\nEXERCISE: Build this prompt yourself, one layer at a time.\n\nStart with just: \"Write me a briefing document.\"\nThen add ROLE \u2192 re-run.\nThen add GOAL \u2192 re-run.\nThen add CONTEXT \u2192 re-run.\nThen add TASK \u2192 re-run.\nThen add EVALUATION \u2192 re-run.\n\nNotice how each layer transforms the output. This is the skill.",
+        resumeBullet: "Structured prompt engineering using the RGCTE framework (Role, Goal, Context, Task, Evaluation)",
+        tip: "Every prompt in this sprint \u2014 and every prompt you'll ever write at work \u2014 uses these five elements. Some are explicit, some are implied. Once you see the pattern, you can build any prompt from scratch without a template."
       },
       {
-        day: 3, title: "Meeting Preparation", tool: "ChatGPT",
+        day: 3, title: "Document Synthesis & Stakeholder Comms", tool: "ChatGPT or Claude",
+        toolLink: "https://claude.ai", icon: "\u{1F4C4}", time: "50 min",
+        objective: "Apply the RGCTE framework to two high-frequency tasks: distilling a long document into an executive summary and drafting stakeholder emails in different tones.",
+        exercise: {
+          title: "Summarize, Then Communicate",
+          scenario: "You've received a 15-page quarterly review and need to: (1) create a 1-page summary for the CEO, then (2) draft three emails to different stakeholders based on the findings.",
+          steps: [
+            "Find any long article or document (a news article, report, or Wikipedia page works)",
+            "Build your own prompt using RGCTE \u2014 don't just copy the template below. Define your Role, the Goal, the Context, the Task, and how you'll Evaluate quality",
+            "Paste your document into ChatGPT or Claude and run your prompt. Compare the output to the template version \u2014 which is better?",
+            "Now use the same findings to draft three emails: one to a board member (formal), one declining a vendor meeting (warm but firm), and one to the team (motivational). Apply RGCTE to each",
+            "Notice how changing the ROLE and EVALUATION elements completely shifts the tone, even when the CONTEXT is identical"
+          ]
+        },
+        prompt: "PART 1 \u2014 DOCUMENT SYNTHESIS:\n\nRole: You are an Executive Operations Partner at a luxury fashion company.\nGoal: My CEO has 5 minutes before a board call and needs to walk in prepared.\nContext: [PASTE YOUR DOCUMENT HERE]\nTask: Synthesize into: (1) a 3-sentence executive summary, (2) top 3 key findings, (3) any risks to flag, (4) recommended next steps.\nEvaluation: Format for a 2-minute scan. Use bold for critical points. No section longer than 3 sentences.\n\n\u2014\u2014\u2014\n\nPART 2 \u2014 STAKEHOLDER EMAILS (use findings from Part 1):\n\nDraft three emails on behalf of the CEO. Same information, different audiences:\n\n1. TO: Board Member \u2014 formal, concise, under 100 words\n2. TO: Vendor requesting a meeting \u2014 warm decline, leave door open, under 80 words\n3. TO: All-hands team \u2014 motivational, authentic, acknowledge effort, under 120 words\n\nEvaluation: Each email should sound human, not corporate. A real person wrote this.",
+        resumeBullet: "AI-powered executive document synthesis and multi-stakeholder communications",
+        tip: "Claude (claude.ai) handles long documents especially well. Try both tools and notice the differences. The ability to say \"I use Claude for synthesis and ChatGPT for drafting\" shows real fluency."
+      },
+      {
+        day: 4, title: "Meeting Preparation", tool: "ChatGPT",
         toolLink: "https://chat.openai.com", icon: "\u{1F4CB}", time: "45 min",
         objective: "Build an AI-powered meeting prep workflow \u2014 agenda, pre-read, talking points, and follow-up template \u2014 in a fraction of the time.",
         exercise: {
           title: "Create a Complete Meeting Package",
           scenario: "The CEO has a quarterly leadership offsite next week. You need to prepare the full meeting package.",
           steps: [
-            "Use the prompt below to generate a meeting agenda",
-            "Ask AI to create a pre-read document for attendees",
-            "Generate talking points for each agenda item",
-            "Create a follow-up email template with action item tracking",
-            "Review everything \u2014 adjust tone, add context only you would know"
+            "Build your prompt using the RGCTE framework \u2014 define who you are, what the CEO needs, the meeting context, exactly what to produce, and what quality looks like",
+            "Generate the agenda, pre-read, and talking points in one pass",
+            "Then generate a follow-up email template with action item tracking as a separate prompt",
+            "Review everything \u2014 adjust tone, add context only you would know",
+            "Save the prompts you built. These are now YOUR templates, not someone else's"
           ]
         },
         prompt: "I'm preparing a quarterly leadership offsite for a CEO and their 6 direct reports (VP Marketing, VP Sales, CFO, VP Product, VP People, General Counsel). The meeting is 4 hours.\n\nPlease create:\n1. A timed agenda with clear objectives for each section\n2. A 1-page pre-read memo summarizing the key topics to be discussed\n3. 2-3 discussion questions per agenda item to drive productive conversation\n4. A post-meeting follow-up email template with an action item tracker (owner, deadline, status)\n\nContext: This is a growth-stage company in the fashion/luxury space. Q1 results were mixed \u2014 revenue up but margins compressed.",
@@ -110,26 +129,44 @@
         tip: "This is the kind of work that used to take 2-3 hours. With AI, the first draft takes 10 minutes. Your value is in the refinement \u2014 adding context, reading the room, knowing what the CEO actually cares about."
       },
       {
-        day: 4, title: "Stakeholder Communications", tool: "ChatGPT or Claude",
-        toolLink: "https://chat.openai.com", icon: "\u2709\uFE0F", time: "45 min",
-        objective: "Master AI-assisted email drafting for different stakeholders and tones \u2014 from board members to vendors to internal teams.",
+        day: 5, title: "AI Safety & Discretion", tool: "All tools",
+        toolLink: null, icon: "\u{1F512}", time: "45 min",
+        objective: "Understand what you can and cannot safely share with AI tools \u2014 especially when handling confidential executive information, board materials, and sensitive communications.",
         exercise: {
-          title: "Draft Emails in Multiple Tones",
-          scenario: "The CEO needs three emails sent today: one to a board member, one declining a vendor meeting politely, and one rallying the team after a tough quarter.",
+          title: "Build Your Personal AI Safety Protocol",
+          scenario: "As a Chief of Staff, you'll handle board minutes, M&A discussions, personnel decisions, and financial data daily. Before you go further in this sprint, you need a clear framework for what's safe to put into AI tools and what isn't.",
           steps: [
-            "Use the prompt below to generate all three emails",
-            "Notice how AI adapts tone for different audiences",
-            "Refine each one \u2014 add personal touches only you would know",
-            "Try: \"Make the board email shorter\" or \"Make the team email more inspiring\"",
-            "Save your favorite prompts \u2014 you'll reuse these constantly"
+            "Read the safety framework below carefully \u2014 this isn't optional, it's foundational",
+            "Practice anonymizing: take a real or hypothetical sensitive scenario and rewrite it so AI can help without exposing confidential details",
+            "Test the boundary: paste the anonymized version into ChatGPT and compare the output quality to what you'd get with full details. You'll find that 90% of the value survives anonymization",
+            "Build your personal checklist: which tool tiers does your target company use? What's their likely AI policy? What questions would you ask in an interview about their AI governance?",
+            "Save your safety protocol \u2014 this is something you can reference in interviews to demonstrate judgment"
           ]
         },
-        prompt: "I need to draft three emails on behalf of my CEO. Please write each with the appropriate tone:\n\n1. TO: Board Member (formal, concise, respectful)\nSubject: Q1 Results Preview\nContext: Results were mixed \u2014 revenue up 12%, but margins compressed due to expansion costs. Meeting next week to discuss.\n\n2. TO: Vendor requesting a meeting (warm but firm decline)\nContext: We're not interested in their CRM platform right now. Leave the door open for future.\n\n3. TO: All-hands company team (motivational, authentic, not corporate-speak)\nContext: Tough quarter, but the team worked hard. New product launches coming in Q2. CEO wants to acknowledge the effort and build momentum.\n\nFor each: keep under 150 words. Sound human, not robotic.",
-        resumeBullet: "AI-assisted executive communications across board, vendor, and internal stakeholders",
-        tip: "The best CoS professionals don't just draft emails \u2014 they match the CEO's voice. After a few rounds, try telling the AI: \"Write this in a tone that's warm but direct, like someone who respects people's time.\""
+        prompt: "AI SAFETY FRAMEWORK FOR EXECUTIVE OPERATIONS\n\n\u2550\u2550\u2550 THE THREE TIERS \u2550\u2550\u2550\n\n\u2460 FREE-TIER TOOLS (ChatGPT free, Claude free, Perplexity free)\n   \u2022 Your prompts MAY be used to train future models\n   \u2022 NEVER paste: real names of employees, board members, or partners in sensitive contexts; actual financial figures, revenue, margins, or runway; M&A targets, term sheets, or deal terms; HR actions, PIPs, terminations, or compensation data; legal matters, pending litigation, or regulatory filings\n   \u2022 SAFE to use for: generic templates, public information research, formatting help, general writing improvement\n\n\u2461 PAID/PRO TIERS (ChatGPT Plus, Claude Pro, enterprise trials)\n   \u2022 Typically do NOT train on your data (check each tool's policy)\n   \u2022 More latitude, but still exercise judgment\n   \u2022 STILL avoid: specific deal terms, employee names in sensitive contexts, attorney-client privileged information\n\n\u2462 ENTERPRISE TIERS (Company-provisioned Microsoft Copilot, ChatGPT Enterprise, Claude for Business)\n   \u2022 Data stays within your organization's boundary\n   \u2022 Covered by your company's data processing agreement\n   \u2022 Appropriate for most internal work, subject to company policy\n\n\u2550\u2550\u2550 THE ANONYMIZATION TECHNIQUE \u2550\u2550\u2550\n\nInstead of: \"Draft an email to Sarah Chen, our CFO, about the acquisition of Meridian Labs for $45M\"\nUse: \"Draft an email to our CFO about a pending acquisition of a mid-size biotech company\"\n\nInstead of: \"Summarize this board deck showing we're projecting $12M revenue shortfall in Q3\"\nUse: \"Summarize a board deck where the company is projecting a significant revenue shortfall in Q3\"\n\nThe AI doesn't need real names or numbers to produce useful output. Your judgment about what to share IS the skill.\n\n\u2550\u2550\u2550 INTERVIEW GOLD \u2550\u2550\u2550\n\nWhen asked \"How do you handle AI and confidentiality?\" you can say:\n\"I use a three-tier framework based on the tool's data policy. Free-tier tools get anonymized inputs only \u2014 no names, no numbers, no deal terms. Enterprise tools within the company boundary get more latitude per the org's AI policy. I always anonymize first and assess whether the output quality justifies the input specificity.\"",
+        resumeBullet: "AI governance and data discretion protocols for confidential executive operations",
+        tip: "This is the day that separates someone who \"uses AI\" from someone a CEO would trust with their most sensitive work. Every hiring manager for a CoS role will ask about confidentiality. Now you have a real answer."
       },
       {
-        day: 5, title: "Research & Intelligence", tool: "Perplexity AI",
+        day: "6-7", title: "Weekend Review & Practice", tool: "All tools so far",
+        toolLink: null, icon: "\u2615", time: "At your own pace",
+        objective: "Revisit your favorite exercises. Try them with real scenarios from your own experience. Focus on building prompts from scratch using the RGCTE framework \u2014 no templates.",
+        exercise: {
+          title: "Real-World Practice",
+          scenario: "Take what you've learned and apply it to something real \u2014 building each prompt yourself.",
+          steps: [
+            "Pick a real company you're interested in and build a full intelligence brief \u2014 write the prompt from scratch using RGCTE",
+            "Draft a real cover letter for an open role. Start with Role and Goal, then add Context, Task, and Evaluation criteria",
+            "Summarize an article you've been meaning to read \u2014 practice anonymizing any sensitive details before pasting",
+            "Draft a networking email to someone in your industry. Try writing the prompt three different ways and compare outputs",
+            "Reflect: Can you build a prompt from scratch without looking at a template? That's the goal"
+          ]
+        },
+        prompt: null, resumeBullet: null,
+        tip: "The real test of Week 1: can you open ChatGPT or Claude, think through the RGCTE elements, and write a prompt that gets you 80% of the way to a finished deliverable? If yes, you've internalized the framework."
+      },
+      {
+        day: 8, title: "Research & Intelligence", tool: "Perplexity AI",
         toolLink: "https://www.perplexity.ai", icon: "\u{1F50D}", time: "60 min",
         objective: "Use AI-powered research to build executive intelligence briefs \u2014 the kind of prep that makes a CEO walk into any meeting feeling prepared.",
         exercise: {
@@ -139,7 +176,7 @@
             "Sign up for Perplexity AI (free) at perplexity.ai \u2014 it searches the web in real time",
             "Use the prompt below to research a target company",
             "Ask follow-up questions: \"Who is their CEO?\" \"Any recent leadership changes?\"",
-            "Compile findings into a 1-page brief using ChatGPT",
+            "Compile findings into a 1-page brief using ChatGPT \u2014 remember to anonymize if needed",
             "This is exactly the kind of deliverable you'd produce as a CoS"
           ]
         },
@@ -148,25 +185,7 @@
         tip: "Perplexity is different from ChatGPT \u2014 it searches the live web and cites its sources. Use it for current information. Use ChatGPT/Claude for drafting and synthesis."
       },
       {
-        day: "6-7", title: "Weekend Review & Practice", tool: "All tools so far",
-        toolLink: null, icon: "\u2615", time: "At your own pace",
-        objective: "Revisit your favorite exercises. Try them with real scenarios from your own experience. The goal is comfort, not perfection.",
-        exercise: {
-          title: "Real-World Practice",
-          scenario: "Take what you've learned and apply it to something real.",
-          steps: [
-            "Pick a real company you're interested in and build a full intelligence brief",
-            "Draft a real cover letter for an open role using AI",
-            "Summarize an article you've been meaning to read",
-            "Draft a networking email to someone in your industry",
-            "Reflect: which tool felt most natural? Which exercise was most valuable?"
-          ]
-        },
-        prompt: null, resumeBullet: null,
-        tip: "Don't worry about being perfect. The goal is to build a habit: \"Before I start writing anything from scratch, let me see if AI can give me a first draft.\""
-      },
-      {
-        day: 8, title: "Microsoft Copilot", tool: "Microsoft 365 Copilot",
+        day: 9, title: "Microsoft Copilot", tool: "Microsoft 365 Copilot",
         toolLink: "https://copilot.microsoft.com", icon: "\u{1F5A5}\uFE0F", time: "60 min",
         objective: "Learn to use AI inside the tools executive teams already use \u2014 Outlook, Word, PowerPoint, and Excel.",
         exercise: {
@@ -185,7 +204,7 @@
         tip: "Copilot is the AI tool most likely to be used in your target companies. Being comfortable with it is a real differentiator."
       },
       {
-        day: 9, title: "Meeting Transcription & Action Items", tool: "Otter.ai",
+        day: 10, title: "Meeting Transcription & Action Items", tool: "Otter.ai",
         toolLink: "https://otter.ai", icon: "\u{1F399}\uFE0F", time: "45 min",
         objective: "Set up AI-powered meeting transcription that automatically captures notes and action items \u2014 a game-changer for executive operations.",
         exercise: {
@@ -204,108 +223,93 @@
         tip: "Imagine telling a hiring manager: \"I use AI to ensure every meeting results in tracked action items with owners and deadlines \u2014 nothing falls through the cracks.\" That's Chief of Staff energy."
       },
       {
-        day: 10, title: "Workflow Automation", tool: "Zapier",
-        toolLink: "https://zapier.com", icon: "\u26A1", time: "60 min",
-        objective: "Create your first automated workflow \u2014 turning repetitive tasks into systems that run themselves.",
+        day: 11, title: "Building AI Systems", tool: "ChatGPT + Zapier",
+        toolLink: "https://zapier.com", icon: "\u{1F9E0}", time: "60 min",
+        objective: "Move from one-off prompts to repeatable systems. Learn to chain prompts together, create reusable workflows, and think like a systems designer \u2014 not just a prompt user.",
         exercise: {
-          title: "Build One Automation",
-          scenario: "Create a simple automation that saves you time on a recurring task.",
+          title: "Design a Repeatable AI Workflow",
+          scenario: "Your CEO has a recurring Monday leadership meeting. Every week you do the same thing: gather updates, build the agenda, prep talking points, run the meeting, extract action items, send follow-ups. Today you'll design a system that chains AI across every step.",
           steps: [
-            "Sign up for Zapier (free tier \u2014 5 automations) at zapier.com",
-            "Create your first \"Zap\": When I receive an email with a specific subject \u2192 Create a task in my to-do app",
-            "Or try: When a Google Calendar event starts \u2192 Send me a Slack/email reminder with prep notes",
-            "Or: When I star an email \u2192 Add it to a Google Sheet tracker",
-            "The point isn't the specific automation \u2014 it's understanding that you CAN automate"
+            "Map the full workflow: list every step from Sunday prep to Tuesday follow-up. Identify where AI adds value at each stage",
+            "Build a prompt chain: create 4 connected prompts where the output of one feeds into the next (agenda \u2192 talking points \u2192 action extraction \u2192 follow-up email)",
+            "Create a Zapier account (free tier) at zapier.com. Build one automation: When a Google Calendar event starts \u2192 Send a prep reminder with your agenda template",
+            "Document the system: write a 1-page overview of what runs automatically, what you prompt manually, and what requires your judgment. This is the blueprint for Day 13's portfolio piece",
+            "The shift: you're no longer asking AI to do tasks \u2014 you're designing systems where AI handles the predictable parts and you handle the judgment calls"
+          ]
+        },
+        prompt: "I want to design a repeatable AI-powered system for weekly executive meetings. Help me think through this as a SYSTEM, not a one-time task.\n\nFor each stage below, tell me:\n- What can be automated or AI-assisted\n- What requires human judgment\n- What prompt I should use (write the actual prompt)\n- How to connect this stage to the next\n\nSTAGES:\n1. SUNDAY PREP: Gather status updates from department leads, compile into agenda\n2. MONDAY MORNING: Generate talking points, flag risks, prepare CEO with key decisions needed\n3. DURING MEETING: Capture notes and decisions in real-time\n4. POST-MEETING (same day): Extract action items, assign owners and deadlines\n5. TUESDAY FOLLOW-UP: Send recap email, create task tracking, set reminder sequence\n\nAlso suggest: Which parts could be automated with Zapier? Where does the human (me) add the most value? What's the minimum I need to touch vs. what can run on autopilot?\n\nFormat this as a professional operations playbook \u2014 something I could hand to my replacement and they'd know exactly how the system works.",
+        resumeBullet: "AI workflow system design: prompt chaining, automation integration, and repeatable executive operations playbooks",
+        tip: "This is the leap from \"I use AI tools\" to \"I design AI-powered systems.\" That's the difference between an executive assistant who uses ChatGPT and a Chief of Staff who builds the operating system for the CEO's office."
+      },
+      {
+        day: 12, title: "Workflow Automation", tool: "Zapier",
+        toolLink: "https://zapier.com", icon: "\u26A1", time: "60 min",
+        objective: "Build the automation layer for your system. Connect the pieces so repetitive steps run themselves.",
+        exercise: {
+          title: "Build Your Automations",
+          scenario: "Take the system you designed yesterday and wire up the automatable parts using Zapier.",
+          steps: [
+            "Sign up for Zapier (free tier \u2014 5 automations) at zapier.com if you haven't already",
+            "Build Zap #1: Calendar event starts \u2192 Send prep email to yourself with your agenda template and prompt chain from Day 11",
+            "Build Zap #2: When you star an email \u2192 Add it to a Google Sheet tracker (for capturing action items and status updates throughout the week)",
+            "Build Zap #3 (optional): When a task is marked complete in your tracker \u2192 Send a notification (for accountability follow-through)",
+            "Document which Zaps you built and what they do \u2014 this goes into tomorrow's portfolio artifact"
           ]
         },
         prompt: null,
         resumeBullet: "Process automation using Zapier for executive office workflows",
-        tip: "You don't need to build complex automations. Even one simple Zap shows employers you think in systems, not just tasks."
+        tip: "You don't need to build complex automations. Even one simple Zap shows employers you think in systems, not just tasks. The point is demonstrating that you look at recurring work and ask: \"What if this just happened automatically?\""
       },
       {
-        day: 11, title: "Deep Research Sprint", tool: "Perplexity + ChatGPT",
-        toolLink: "https://www.perplexity.ai", icon: "\u{1F9E0}", time: "60 min",
-        objective: "Combine multiple AI tools to produce a professional-grade deliverable \u2014 the kind of work product that demonstrates AI-augmented executive operations.",
-        exercise: {
-          title: "Full Company Intelligence Brief",
-          scenario: "Pick a company from your target list and produce a complete intelligence package \u2014 as if your CEO asked you to prepare for a partnership meeting.",
-          steps: [
-            "Use Perplexity to gather current information (news, leadership, strategy)",
-            "Use ChatGPT to synthesize findings into a structured briefing document",
-            "Add talking points and recommended questions",
-            "Format it professionally \u2014 this is a portfolio piece",
-            "Save it \u2014 you can show this in interviews as an example of your AI-augmented work"
-          ]
-        },
-        prompt: "Using the research I've gathered below, please create a professional Executive Intelligence Brief formatted as:\n\nCOMPANY: [Name]\nPREPARED FOR: CEO \u2014 [Meeting/Purpose]\nDATE: [Today]\n\n1. COMPANY SNAPSHOT (3 sentences)\n2. LEADERSHIP TEAM (key names, titles, relevant background)\n3. RECENT DEVELOPMENTS (last 6 months, bulleted)\n4. STRATEGIC PRIORITIES (what they're focused on)\n5. RISKS & CHALLENGES\n6. OPPORTUNITIES FOR PARTNERSHIP/ENGAGEMENT\n7. RECOMMENDED TALKING POINTS (3-5 points)\n8. SMART QUESTIONS TO ASK (3-5 questions that show deep understanding)\n\nTone: Professional, concise, board-ready.\n\nRESEARCH:\n[PASTE YOUR PERPLEXITY FINDINGS HERE]",
-        resumeBullet: "Multi-tool AI research workflows for executive intelligence and decision support",
-        tip: "This deliverable is your proof. When an interviewer asks \"How do you use AI?\" you can show them this and say: \"I built this in 30 minutes using Perplexity for research and ChatGPT for synthesis.\""
-      },
-      {
-        day: 12, title: "Build Your Portfolio Artifact", tool: "All tools",
+        day: 13, title: "Build Your Portfolio Artifact", tool: "All tools",
         toolLink: null, icon: "\u{1F3D7}\uFE0F", time: "90 min",
-        objective: "Create the \"Executive Meeting-to-Action System\" \u2014 a complete workflow document that demonstrates your AI-augmented executive operations capability.",
+        objective: "Create the \"Executive Meeting-to-Action System\" \u2014 a complete workflow document that demonstrates your AI-augmented executive operations capability. This is your proof.",
         exercise: {
           title: "Meeting-to-Action System",
-          scenario: "Build a template/workflow that shows how you'd run the executive meeting process from prep to follow-through, using AI at every step.",
+          scenario: "Package everything you've built into a professional operations document. This is what you show hiring managers.",
           steps: [
-            "Use ChatGPT to draft the system overview (see prompt below)",
-            "Create a meeting prep template (Day 3 skills)",
-            "Create an action item tracker format (Day 9 skills)",
-            "Add the automation layer (Day 10 \u2014 how Zapier connects the pieces)",
-            "Package it as a clean document \u2014 this goes in your portfolio"
+            "Use ChatGPT to draft the system overview (see prompt below) \u2014 apply the RGCTE framework to structure your prompt",
+            "Include your prompt chain from Day 11 (the connected prompts that flow into each other)",
+            "Include your automation layer from Day 12 (which Zaps you built and what they trigger)",
+            "Add your safety protocol from Day 5 (how you handle confidential information in AI workflows)",
+            "Package it as a clean document \u2014 this goes in your portfolio. When an interviewer asks \"How do you use AI?\" you hand them this"
           ]
         },
-        prompt: "Help me create an \"Executive Meeting-to-Action System\" \u2014 a professional workflow document I can show to prospective employers. It should demonstrate how I use AI tools to run executive meeting operations.\n\nStructure:\n1. SYSTEM OVERVIEW: What this system does and why it matters (2-3 sentences)\n2. PRE-MEETING (AI-assisted): How I use AI to prepare agendas, pre-reads, and briefings\n3. DURING MEETING: How I use Otter.ai for transcription and real-time capture\n4. POST-MEETING (AI-assisted): How I use AI to extract action items, draft follow-up emails, and create accountability tracking\n5. AUTOMATION LAYER: How Zapier connects the pieces (calendar triggers, task creation, reminder sequences)\n6. TOOLS USED: ChatGPT/Claude, Otter.ai, Zapier, Microsoft 365\n7. RESULTS: What this system achieves (faster follow-through, nothing falls through cracks, CEO always prepared)\n\nMake it look like a professional operations document, not a school assignment. This is executive-level work.",
+        prompt: "Help me create an \"Executive Meeting-to-Action System\" \u2014 a professional workflow document I can show to prospective employers. It should demonstrate how I use AI tools to run executive meeting operations.\n\nStructure:\n1. SYSTEM OVERVIEW: What this system does and why it matters (2-3 sentences)\n2. PRE-MEETING (AI-assisted): How I use AI to prepare agendas, pre-reads, and briefings\n3. DURING MEETING: How I use Otter.ai for transcription and real-time capture\n4. POST-MEETING (AI-assisted): How I use AI to extract action items, draft follow-up emails, and create accountability tracking\n5. PROMPT CHAIN: The connected prompts I use at each stage (show the actual prompts)\n6. AUTOMATION LAYER: How Zapier connects the pieces (calendar triggers, task creation, reminder sequences)\n7. DATA & CONFIDENTIALITY: How I handle sensitive information across free-tier, pro, and enterprise AI tools\n8. TOOLS USED: ChatGPT/Claude, Otter.ai, Zapier, Microsoft 365, Perplexity\n9. RESULTS: What this system achieves (faster follow-through, nothing falls through cracks, CEO always prepared)\n\nMake it look like a professional operations document, not a school assignment. This is executive-level work.",
         resumeBullet: "Designed and implemented AI-augmented executive meeting-to-action operating system",
-        tip: "This is the capstone. If you can show this to a hiring manager and walk them through it, you've just demonstrated exactly the kind of systems thinking they want in a Chief of Staff."
+        tip: "This is the capstone. If you can show this to a hiring manager and walk them through it \u2014 the prompt chain, the automations, the safety protocol \u2014 you've just demonstrated exactly the kind of systems thinking they want in a Chief of Staff."
       },
       {
-        day: 13, title: "Resume Upgrade", tool: "ChatGPT",
-        toolLink: "https://chat.openai.com", icon: "\u{1F4DD}", time: "45 min",
-        objective: "Update your resume with the specific AI tools and skills you've now actually used. No more \"foundational concepts\" \u2014 you have real experience.",
+        day: 14, title: "Resume Upgrade & Celebration", tool: "ChatGPT",
+        toolLink: "https://chat.openai.com", icon: "\u{1F389}", time: "45 min",
+        objective: "Update your resume with the specific AI tools and skills you've now actually used. Then take a moment \u2014 you've gone from AI-curious to AI-capable in two weeks.",
         exercise: {
-          title: "Rewrite Your AI Section",
-          scenario: "Transform your resume's AI section from aspirational to demonstrable.",
+          title: "Rewrite Your AI Section & Reflect",
+          scenario: "Transform your resume's AI section from aspirational to demonstrable \u2014 then plan forward.",
           steps: [
-            "Review the resume bullets you've earned throughout this sprint (listed below)",
-            "Use ChatGPT to help wordsmith them for your specific resume format",
-            "Replace the current \"Professional Development\" section with concrete tools and skills",
-            "Add AI references to your experience bullets where relevant",
-            "Review the before/after comparison at the bottom of this page"
-          ]
-        },
-        prompt: "I need to update the AI section of my resume. I'm an Executive Operations professional targeting Chief of Staff roles.\n\nReplace this current section:\n\"AI AND AUTOMATION (PROFESSIONAL DEVELOPMENT)\n- Generative AI for executive productivity with verification and confidentiality practices\n- Workflow mapping and SOP documentation; identifying automation opportunities\n- Foundational AI adoption concepts: use-case intake, change management, and governance guardrails\"\n\nWith a stronger section that reflects tools I've actually used:\n- ChatGPT and Claude for executive briefings, document synthesis, and stakeholder communications\n- Microsoft 365 Copilot for email, documents, and presentations\n- Otter.ai for meeting transcription and action-item extraction\n- Zapier for workflow automation in executive office processes\n- Perplexity AI for competitive intelligence and executive research\n\nMake it concise (3-4 bullet points max) and format it for a 1-page executive resume. The tone should convey \"I use these daily\" not \"I'm learning about these.\"",
-        resumeBullet: null,
-        tip: "The 56% salary premium goes to people who list specific tools, not vague concepts. \"ChatGPT for executive briefings\" beats \"Generative AI knowledge\" every time."
-      },
-      {
-        day: 14, title: "Celebration & Next Steps", tool: "You!",
-        toolLink: null, icon: "\u{1F389}", time: "30 min",
-        objective: "Review everything you've accomplished. You've gone from AI-curious to AI-capable in two weeks.",
-        exercise: {
-          title: "Reflect and Plan Forward",
-          scenario: "Take stock of your new capabilities and plan how to keep building.",
-          steps: [
-            "Review your updated resume \u2014 feel the difference?",
-            "Look at your portfolio artifact (Meeting-to-Action System) \u2014 this is real proof",
+            "Review the resume bullets you've earned throughout this sprint (check the Resume Builder tab)",
+            "Use ChatGPT to help wordsmith them for your specific resume format. Apply RGCTE: tell it your Role, the Goal (land CoS interviews), Context (your experience), Task (rewrite the section), Evaluation (concise, tool-specific, sounds like daily use)",
+            "Replace the current \"Professional Development\" section with concrete tools and systems. Include: prompt engineering, AI safety protocols, and workflow automation \u2014 not just tool names",
             "Update your LinkedIn headline to include AI-related positioning",
-            "Commit to using AI for one task every day going forward",
-            "Celebrate \u2014 you just did something most professionals haven't done yet"
+            "Celebrate \u2014 you just did something most professionals haven't done yet. You didn't just learn tools, you developed a new way of working"
           ]
         },
-        prompt: null, resumeBullet: null,
-        tip: "You didn't just learn tools \u2014 you developed a new way of working. Every task now starts with: \"Can AI give me a first draft?\" That's the mindset shift that matters."
+        prompt: "I need to update the AI section of my resume. I'm an Executive Operations professional targeting Chief of Staff roles.\n\nReplace this current section:\n\"AI AND AUTOMATION (PROFESSIONAL DEVELOPMENT)\n- Generative AI for executive productivity with verification and confidentiality practices\n- Workflow mapping and SOP documentation; identifying automation opportunities\n- Foundational AI adoption concepts: use-case intake, change management, and governance guardrails\"\n\nWith a stronger section that reflects tools and systems I've actually built:\n- Structured prompt engineering (RGCTE framework) for executive briefings, document synthesis, and stakeholder communications\n- AI workflow system design: prompt chaining, automation integration, and repeatable operations playbooks\n- Microsoft 365 Copilot for email, documents, and presentations; Otter.ai for meeting transcription and action-item extraction\n- Zapier workflow automation for executive office processes; Perplexity AI for competitive intelligence\n- AI governance protocols: three-tier data classification, input anonymization, and confidentiality-first AI usage\n\nMake it concise (4-5 bullet points max) and format it for a 1-page executive resume. The tone should convey \"I built systems with these\" not \"I'm learning about these.\"",
+        resumeBullet: null,
+        tip: "The 56% salary premium goes to people who list specific tools AND demonstrate how they think about using them. \"Designed AI-powered executive operations playbooks with prompt chaining and automation\" beats \"Generative AI knowledge\" every single time."
       }
     ];
 
     const promptLibrary = [
-      { category: "Executive Briefings", prompt: "I'm preparing a briefing for my CEO who is meeting with [Person/Company]. Create a 1-page document covering: company overview, key people to know, recent news, talking points, and 3 smart questions to ask. Tone: concise, CEO-ready.", icon: "\u{1F4CB}" },
-      { category: "Email Drafting", prompt: "Draft a professional email from [CEO name] to [recipient + context]. The tone should be [formal/warm/direct]. Keep it under [X] words. The key message is: [main point].", icon: "\u2709\uFE0F" },
+      { category: "RGCTE Framework (Blank)", prompt: "Use this structure for ANY prompt you build:\n\nROLE: You are a [job title/expertise] at [type of company]...\nGOAL: I need [what success looks like \u2014 what will you do with this output?]...\nCONTEXT: [The situation \u2014 who, what, when, why, constraints, background]...\nTASK: Please create/draft/analyze [exactly what to produce, in what format, with what sections]...\nEVALUATION: [Quality criteria \u2014 tone, length, audience, what to avoid, how you'll judge it]...", icon: "\u{1F9EC}" },
+      { category: "Executive Briefings", prompt: "Role: You are a Chief of Staff at a [industry] company.\nGoal: My CEO needs to walk into a meeting feeling fully prepared in under 5 minutes of reading.\nContext: Meeting with [Person/Company]. [Add any known context about the meeting purpose.]\nTask: Create a 1-page briefing covering: company overview, key people to know, recent news, talking points, and 3 smart questions to ask.\nEvaluation: Concise, CEO-ready. No section longer than 3 sentences. No jargon.", icon: "\u{1F4CB}" },
+      { category: "Email Drafting", prompt: "Role: You are drafting on behalf of a CEO who is [warm but direct / formal / casual].\nGoal: The recipient should [take specific action / feel acknowledged / understand the decision].\nContext: [Describe the situation and relationship with recipient.]\nTask: Draft a professional email under [X] words. The key message is: [main point].\nEvaluation: Should sound human, not corporate. A real person wrote this.", icon: "\u2709\uFE0F" },
       { category: "Meeting Agendas", prompt: "Create a timed agenda for a [duration] meeting with [attendees]. The goals are: [list goals]. Include discussion questions for each section and a format for capturing decisions and action items.", icon: "\u{1F4C5}" },
-      { category: "Document Summary", prompt: "Summarize the following document for a busy executive. Provide: a 3-sentence executive summary, top 3 takeaways, any risks to flag, and recommended next steps. Format for a 2-minute scan. [PASTE DOCUMENT]", icon: "\u{1F4C4}" },
+      { category: "Document Summary", prompt: "Role: Executive Operations Partner preparing materials for a busy CEO.\nGoal: CEO has [X minutes] and needs to understand the key points and decisions required.\nContext: [PASTE YOUR DOCUMENT HERE]\nTask: Synthesize into: (1) 3-sentence executive summary, (2) top 3 takeaways, (3) risks to flag, (4) recommended next steps.\nEvaluation: Format for a 2-minute scan. Bold the critical points. No section over 3 sentences.", icon: "\u{1F4C4}" },
+      { category: "Anonymization Helper", prompt: "I need to use AI to help with a sensitive work scenario, but I can't share confidential details. Help me anonymize the following:\n\nORIGINAL SCENARIO: [Describe what you need help with, including sensitive details]\n\nPlease rewrite this scenario replacing: real company names with generic descriptions, real names with role titles, specific financial figures with relative terms (e.g., \"significant shortfall\"), and any identifying details with generic equivalents.\n\nThen help me with the anonymized version.", icon: "\u{1F512}" },
       { category: "Company Research", prompt: "Research [Company Name] and provide: overview, CEO and leadership team, recent news (last 6 months), culture signals, strategic challenges, and 3 questions that show deep understanding of their business.", icon: "\u{1F50D}" },
       { category: "Action Item Extraction", prompt: "Extract all action items from this meeting transcript. Format as: [Owner] \u2014 [Action] \u2014 [Suggested Deadline]. Also list key decisions made and open questions needing follow-up. [PASTE TRANSCRIPT]", icon: "\u2705" },
+      { category: "Prompt Chain Starter", prompt: "I'm building an AI-powered system for [recurring task]. Help me design a prompt chain where each step feeds into the next.\n\nFor each stage, give me:\n1. The exact prompt to use\n2. What input it needs (from the previous step or from me)\n3. What output it produces (that feeds the next step)\n4. Where human judgment is required before moving on\n\nStages: [List your stages, e.g., Research \u2192 Synthesis \u2192 Draft \u2192 Review \u2192 Send]", icon: "\u{1F517}" },
       { category: "Cover Letter", prompt: "Write a cover letter for [Role] at [Company]. My background: [2-3 key experiences]. What excites me about this role: [specific reason]. Tone: professional, warm, confident. Keep it to 3 paragraphs.", icon: "\u{1F4DD}" },
       { category: "Interview Prep", prompt: "I'm interviewing for [Role] at [Company]. Generate 10 likely behavioral questions, then help me structure STAR stories for each using these experiences: [list 3-4 situations from your career].", icon: "\u{1F3A4}" },
       { category: "Status Update", prompt: "Help me write a weekly status update for my CEO. Format: Top 3 wins this week, Key decisions needed, Risks/blockers, Next week priorities. Context: [describe what happened this week].", icon: "\u{1F4CA}" },
@@ -440,11 +444,11 @@
                   <p className="text-gray-600">Each day builds on the last. Open a card, follow the steps, copy the prompts, and practice. By Day 14, you'll have real AI skills and a portfolio to prove it.</p>
                 </div>
                 <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="text-sm text-blue-800"><span className="font-semibold">Week 1</span> &mdash; Core AI Fluency: ChatGPT, Claude, Perplexity</p>
+                  <p className="text-sm text-blue-800"><span className="font-semibold">Week 1</span> &mdash; Foundations: Prompt Engineering, Core Tools & AI Safety</p>
                 </div>
                 {sprintDays.slice(0, 6).map((day, i) => <DayCard key={i} data={day} />)}
                 <div className="mb-4 mt-6 p-3 bg-purple-50 border border-purple-200 rounded-lg">
-                  <p className="text-sm text-purple-800"><span className="font-semibold">Week 2</span> &mdash; Advanced Tools & Portfolio Building</p>
+                  <p className="text-sm text-purple-800"><span className="font-semibold">Week 2</span> &mdash; Advanced Tools, Systems Design & Portfolio</p>
                 </div>
                 {sprintDays.slice(6).map((day, i) => <DayCard key={i + 6} data={day} />)}
               </div>
@@ -490,10 +494,11 @@
                     <h3 className="font-semibold text-green-800 mb-3 flex items-center gap-2">&check; After (Sprint Complete)</h3>
                     <div className="text-sm text-green-700 space-y-2">
                       <p className="font-medium text-xs uppercase tracking-wider text-green-500">AI & AUTOMATION TOOLS</p>
-                      <p>&bull; ChatGPT / Claude for executive briefings, document synthesis, and stakeholder communications</p>
-                      <p>&bull; Microsoft 365 Copilot for email, documents, presentations, and data analysis</p>
-                      <p>&bull; Otter.ai for AI-powered meeting transcription and action-item extraction</p>
-                      <p>&bull; Zapier for executive office workflow automation; Perplexity AI for competitive intelligence</p>
+                      <p>&bull; Structured prompt engineering (RGCTE framework) for executive briefings, document synthesis, and stakeholder communications using ChatGPT and Claude</p>
+                      <p>&bull; AI workflow system design: prompt chaining, automation integration, and repeatable executive operations playbooks</p>
+                      <p>&bull; Microsoft 365 Copilot for email, documents, and presentations; Otter.ai for meeting transcription and action-item extraction</p>
+                      <p>&bull; Zapier workflow automation for executive office processes; Perplexity AI for competitive intelligence</p>
+                      <p>&bull; AI governance protocols: three-tier data classification, input anonymization, and confidentiality-first AI usage</p>
                     </div>
                   </div>
                 </div>
